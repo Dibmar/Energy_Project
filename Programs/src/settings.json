@@ -1,0 +1,7 @@
+{
+        "files": ["F:\\Data\\Energy\\electricity_generation_total.csv",
+                "F:\\Data\\Energy\\hydro_power_generation_total.csv",
+                "F:\\Data\\Energy\\nuclear_power_generation_total.csv"],
+        "parent_directory" : "F:\\Python\\My_Git\\Energy_Project\\Programs",
+        "names": ["electricity_generation",  "hydro_electric_engergy_sliced", "nuclear_engergy_sliced"]
+}
