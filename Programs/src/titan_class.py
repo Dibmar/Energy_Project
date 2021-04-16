@@ -357,6 +357,95 @@ class Titan ():
                                     downcast= downcast)
             
 
+    def operations(self, how= None, other= None, column= None, position= None):
+        """
+                            ---What it does--
+        This function allows the user to add, subtract, multiply and divide dataframes by some number.
+        
+                            ---What it needs---
+            - What operation is desired (how)
+            - The number to be add (other)
+            - Column to be used if desired (column), should be string
+            - The position of the column to be used (position), should be string
+
+                            ---What it returns---
+        This function does not return anything
+        """
+        methods = ['add', 'sub', 'mul', 'div']
+
+        if how in methods:
+
+            if column == None and position == None:
+                if how == methods[0]:
+                    print(f'Adding {other}')
+                    self.df = self.df.add(other)
+                
+                elif how == methods[1]:
+                    print(f'Subtracting by {other}')
+                    self.df = self.df.sub(other)
+
+                elif how == methods[2]:
+                    print(f'Multiplying by {other}')
+                    self.df = self.df.multiply(other)
+
+                elif how == methods[3]:
+                    print(f'Dividing by {other}')
+                    self.df = self.df.div(other)
+
+            elif column != None:
+                if how == methods[0]:
+                    print(f'Adding {other}')
+                    self.df[column] = self.df[column].add(other)
+                
+                elif how == methods[1]:
+                    print(f'Subtracting by {other}')
+                    self.df[column] = self.df[column].sub(other)
+
+                elif how == methods[2]:
+                    print(f'Multiplying by {other}')
+                    self.df[column] = self.df[column].mul(other)
+
+                elif how == methods[3]:
+                    print(f'Dividing by {other}')
+                    self.df[column] = self.df[column].div(other)
+            
+            elif position != None:
+                if how == methods[0]:
+                    print(f'Adding {other}')
+                    self.df.iloc[:, position] = self.df.iloc[:, position].add(other)
+                
+                elif how == methods[1]:
+                    print(f'Subtracting by {other}')
+                    self.df.iloc[:, position] = self.df.iloc[:, position].sub(other)
+
+                elif how == methods[2]:
+                    print(f'Multiplying by {other}')
+                    self.df.iloc[:, position] = self.df.iloc[:, position].mul(other)
+
+                elif how == methods[3]:
+                    print(f'Dividing by {other}')
+                    self.df.iloc[:, position] = self.df.iloc[:, position].div(other)
+
+        else:
+            print('Pass a valid argument! only "add", "sub", "mul", "div" are valid inputs.')
+
+        
+    def column_change(self, column= None, new_name= None):
+        """
+                            ---What it does---
+        This function change the name of a column
+                            
+                            ---What it needs---
+            - The old name of the column (column)
+            - The name of the new column (new_name)
+                            
+                            ---What it returns---
+        This function does not return anything
+        """
+        
+        print(f"Changing {column}'s name to {new_name}")
+        self.df.rename({column: new_name})
+
     def return_df(self, wish= False, name= None):
         """
                             ---What it does---
@@ -666,6 +755,28 @@ class Titan ():
                 
                 else:
                     self.df == self.df.iloc[position_1: position_2, : ]
+
+
+    def set_my_index(self, keys, drop=True, 
+                    append=False, inplace=True, 
+                    verify_integrity=False):
+        """
+                            ---What it does---
+        This function sets a new index for your dataframe
+
+                            ---What it needs---
+            - The pd.set_index standard arguments:
+                + The new index (keys)
+                + Elimination of the old column (drop), set as True by default
+                + Appending the existing columns to the existing index (append), set as False by default
+                + Wether or not to maintaing changes (inplace), set as True by default
+                + Wether or not to check for duplicates (verify_integrity), set as False by default
+
+                            ---What it returns---
+        This function does not return anything
+        """
+        print(f'Setting new index by {keys}...')
+        self.df.set_index(keys = keys, drop= drop, append= False, inplace= inplace, verify_integrity= verify_integrity)
 
 
     def store_csv(self, name= None, parent_directory= None, destination= 'Output'):
