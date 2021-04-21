@@ -4,5 +4,7 @@
                 "F:\\Data\\Energy\\nuclear_power_generation_total.csv"],
         "parent_directory" : "F:\\Python\\My_Git\\Energy_Project\\Programs",
         "names": ["electricity_generation",  "hydro_electric_engergy_sliced", "nuclear_engergy_sliced"],
-        "oil-tonn_equivalent_to_kw_h": 11630
+        "oil-tonn_equivalent_to_kw_h": 11630,
+        "country_of_choice": "Spain",
+        "columns_of_choice": ["Total production", "Nuclear energy", "Hydro-electric energy"]
 }

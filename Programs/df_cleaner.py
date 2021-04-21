@@ -2,8 +2,9 @@
 
 # Imports of custom libraries
 from src.titan_class import Titan as EDA
-import src.use_plotly as graphics
 import src.settings_reader as reader
+
+# Import libraries
 import os
 
 # Extraction of settings
@@ -11,11 +12,8 @@ dirname = os.path.dirname(__file__)
 filename = dirname + '\src\settings.json'
 
 settings = reader.read_config(path= filename)
-# print(settings)
 
-# Cleaning and plotting of the data
-
-## Cleaning
+# Cleaning  data
 files = settings['files']
 names = settings['names']
 equivalent = settings['oil-tonn_equivalent_to_kw_h']

@@ -1,6 +1,48 @@
 import plotly.express as px
 import plotly.graph_objects as go
+import sys, os
 
+# Save image fucntion
+def save_my_image(name, parent_directory, destination, fig):
+    """
+                        ---What it does---
+     This function stores a plotly image as an html file in a given directory. If it finds the directory, uses it and if not, creates it.
+     
+                        ---What it needs---
+        - A name for the plot (name)
+        - The parent directories full path (parent_directory).
+        - Where to store the file (destination)
+
+                        ---What it returns---
+     This function does not return anything
+    """      
+            
+    # Images\ directory check up and creation
+    if parent_directory.endswith('\\'):
+        pass
+    else:
+        parent_directory = parent_directory + '\\'
+
+    path = parent_directory + destination
+    directory_exists = os.path.isdir(path)
+    name = name + '.html'
+
+    if destination.endswith('\\'):
+        final_path = path + name
+    
+    else:
+        final_path = path + '\\' + name
+    
+    
+    if directory_exists == False:
+        print(f'Creating {destination}')
+        os.mkdir(path)
+
+    # csv file stored
+    print(f'The file will be stored as "{name}" in {destination}...')
+    fig.write_html(final_path)
+
+# Plotting functions
 def create_line_plot (data_frame= None, x=None, y=None, 
                 line_group=None, color=None, 
                 line_dash=None, hover_name=None, 
@@ -15,7 +57,7 @@ def create_line_plot (data_frame= None, x=None, y=None,
                 color_discrete_map=None, line_dash_sequence=None, line_dash_map=None, 
                 log_x=False, log_y=False, range_x=None, range_y=None, line_shape=None, 
                 render_mode='auto', title=None, template=None, width=None, 
-                height=None, save= False, path= 'Output/', name= None):
+                height=None, save= False, destination= 'Images', parent_directory= None, name= None):
     """
                         ---What it does---
     This function creates a line plot. Then stores the plot in html format if desired.
@@ -50,8 +92,7 @@ def create_line_plot (data_frame= None, x=None, y=None,
     fig.show()
 
     if save == True:
-        full_path = f'{path}{name}.html' 
-        fig.write_html(full_path)
+        save_my_image(name= name, parent_directory= parent_directory, destination= destination, fig= fig)
 
 
 def create_bar_plot(data_frame=None, x=None, y=None, 
@@ -68,7 +109,7 @@ def create_bar_plot(data_frame=None, x=None, y=None,
                     opacity=None, orientation=None, barmode='relative', 
                     log_x=False, log_y=False, range_x=None, range_y=None, 
                     title=None, template=None, width=None, height=None,
-                    save= False, path= 'Output/', name= None):
+                    destination= 'Images', parent_directory= None, name= None):
     """
                         ---What it does---
     This function creates a bar plot. Then stores the plot in html format if desired.
@@ -104,8 +145,7 @@ def create_bar_plot(data_frame=None, x=None, y=None,
     fig.show()
 
     if save == True:
-        full_path = f'{path}{name}.html' 
-        fig.write_html(full_path)
+        save_my_image(name= name, parent_directory= parent_directory, destination= destination, fig= fig)
 
 
 def create_pie_plot(data_frame=None, names=None, values=None, 
@@ -113,8 +153,8 @@ def create_pie_plot(data_frame=None, names=None, values=None,
                     color_discrete_map=None, hover_name=None, 
                     hover_data=None, custom_data=None, labels=None, 
                     title=None, template=None, width=None, height=None, 
-                    opacity=None, hole=None, save= False, path= 'Output/', 
-                    name= None):
+                    opacity=None, hole=None, save= False, destination= 'Images', 
+                    parent_directory= None, name= None):
     """
                         ---What it does---
     This function creates a pie plot. Then stores the plot in html format if desired.
@@ -140,12 +180,12 @@ def create_pie_plot(data_frame=None, names=None, values=None,
     fig.show()
 
     if save == True:
-        full_path = f'{path}{name}.html' 
-        fig.write_html(full_path)
+        save_my_image(name= name, parent_directory= parent_directory, destination= destination, fig= fig)
 
 
-def create_heat_map(data = None, save= False, path= 'Output/', 
-                    name= None):
+
+def create_heat_map(data = None, save= False, destination= 'Images', 
+                    parent_directory= None, name= None):
     """
     TODO lack in function options
                         ---What it does---
@@ -168,9 +208,10 @@ def create_heat_map(data = None, save= False, path= 'Output/',
     fig.show()
 
     if save == True:
-        full_path = f'{path}{name}.html' 
-        fig.write_html(full_path)
+        save_my_image(name= name, parent_directory= parent_directory, destination= destination, fig= fig)
 
 
 def create_map():
     pass
+
+
