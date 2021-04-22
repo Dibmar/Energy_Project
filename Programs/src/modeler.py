@@ -89,8 +89,8 @@ class Model_Maker():
             self.y = self.df[test]
 
         elif (range_of_columns != None) and (index_test != None):
-            self.X = self.df.iloc[:, range_of_columns]
-            self.y = self.df[index_test]
+            self.X = self.df.iloc[:, range_of_columns[0]:range_of_columns[1]]
+            self.y = self.df.iloc[:, index_test]
         
         else:
             print('Your input does not compute. Make up your mind!')
@@ -171,7 +171,7 @@ class Model_Maker():
         logistic_list = ['logistic', 'Logistic', 'LOGISTIC']
 
         if kind in linear_list:
-            created_model = LinearRegression(fit_intercept= fit_intercept, 
+            self.created_model = LinearRegression(fit_intercept= fit_intercept, 
                                                 normalize=normalize, copy_X=copy_X, 
                                                 n_jobs=n_jobs, positive=positive)
             print(self.created_model)

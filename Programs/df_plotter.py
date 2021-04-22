@@ -48,7 +48,7 @@ data.columns = data.iloc[0,:]
 data = data.drop('Date', axis = 0)
 
 # Plotting
-title = f"Evolution of {country_of_choice}'s energy production"
+title = f"Evolution of {country_of_choice}'s energy production in oil tonns"
 name = f'{country_of_choice}_energy_production'
 
 graphics.create_line_plot(data_frame= data, 
